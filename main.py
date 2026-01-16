@@ -44,7 +44,14 @@ newest_id += 1
 
 user_choice = None
 while True:
-    user_choice = input("choice: ")
+
+    print("\n========== What would you like to do? ==========")
+    print("1: Add a new task")
+    print("2: Retrieve next task")
+    print("3: Retrieve task by ID")
+    print("4: Mark a task as complete")
+    print("quit: Exit program")
+    user_choice = input("\nchoice: ")
     
     match user_choice:
 
