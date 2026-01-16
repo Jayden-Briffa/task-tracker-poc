@@ -17,10 +17,25 @@ def add_task(description, priority):
 
     return current_tasks[new_task["id"]]
 
+def get_task_by_priority():
+        if priority_idx.empty():
+             return {}
+
+        priority_task = priority_idx.get_nowait()
+        next_task = current_tasks[priority_task[1]]
+
+        return next_task
+
 def get_task_by_id(id):
         found_task = current_tasks.get(id, {}) # Retrieve the task safely. Return {} if doesn't exist+
         return found_task
 
+add_task("apples", 3)
+newest_id += 1
+add_task("bananas", 1)
+newest_id += 1
+add_task("oranges", 2)
+newest_id += 1
 
 user_choice = None
 while True:
@@ -37,8 +52,8 @@ while True:
             print(new_task)
 
         case "2":
-            # Get task by priority
-            # print(next_task)
+            next_task = get_task_by_priority()
+            print(next_task)
             pass
 
         case "3":
