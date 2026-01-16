@@ -9,7 +9,7 @@ def add_task(description, priority):
         "id": newest_id,
         "description": description,
         "priority": priority,
-        "status": "incomplete" # Kept non-boolean for future scalability
+        "status": "Incomplete" # Kept non-boolean for future scalability
     }
 
     current_tasks[new_task["id"]] = new_task
@@ -31,7 +31,7 @@ def get_task_by_id(id):
     return found_task
 
 def complete_task(id):
-    current_tasks[id]["status"] = "complete"
+    current_tasks[id]["status"] = "Complete"
     return current_tasks[id]
 
 
