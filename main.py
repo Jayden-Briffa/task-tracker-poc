@@ -9,7 +9,7 @@ def add_task(description, priority):
         "id": newest_id,
         "description": description,
         "priority": priority,
-        "status": "incomplete"
+        "status": "incomplete" # Kept non-boolean for future scalability
     }
 
     current_tasks[new_task["id"]] = new_task
@@ -18,17 +18,22 @@ def add_task(description, priority):
     return current_tasks[new_task["id"]]
 
 def get_task_by_priority():
-        if priority_idx.empty():
-             return {}
+    if priority_idx.empty():
+            return {}
 
-        priority_task = priority_idx.get_nowait()
-        next_task = current_tasks[priority_task[1]]
+    priority_task = priority_idx.get_nowait()
+    next_task = current_tasks[priority_task[1]]
 
-        return next_task
+    return next_task
 
 def get_task_by_id(id):
-        found_task = current_tasks.get(id, {}) # Retrieve the task safely. Return {} if doesn't exist+
-        return found_task
+    found_task = current_tasks.get(id, {}) # Retrieve the task safely. Return {} if doesn't exist+
+    return found_task
+
+def complete_task(id):
+    current_tasks[id]["status"] = "complete"
+    return current_tasks[id]
+
 
 add_task("apples", 3)
 newest_id += 1
@@ -66,8 +71,8 @@ while True:
         case "4":
             id = input("Enter the task's id: ")
 
-            # Mark task as complete with id
-            # print(task)
+            task = complete_task(int(id))
+            print(task)
 
         case "quit":
             print("Shutting down...")
