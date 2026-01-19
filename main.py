@@ -2,6 +2,8 @@ from queue import PriorityQueue as Priority_Queue
 
 current_tasks = dict()
 priority_idx = Priority_Queue()
+
+# Id to be given to the nexdt task
 newest_id = 0
 
 def add_task(description, priority):
@@ -9,7 +11,7 @@ def add_task(description, priority):
         "id": newest_id,
         "description": description,
         "priority": priority,
-        "status": "Incomplete" # Kept non-boolean for future scalability
+        "status": "Incomplete"
     }
 
     current_tasks[new_task["id"]] = new_task
@@ -27,20 +29,12 @@ def get_task_by_priority():
     return next_task
 
 def get_task_by_id(id):
-    found_task = current_tasks.get(id, {}) # Retrieve the task safely. Return {} if doesn't exist+
+    found_task = current_tasks.get(id, {}) # Retrieve the task safely. Return {} if doesn't exist
     return found_task
 
 def complete_task(id):
     current_tasks[id]["status"] = "Complete"
     return current_tasks[id]
-
-
-add_task("apples", 3)
-newest_id += 1
-add_task("bananas", 1)
-newest_id += 1
-add_task("oranges", 2)
-newest_id += 1
 
 user_choice = None
 while True:
@@ -55,6 +49,7 @@ while True:
     
     match user_choice:
 
+        # Add task
         case "1":
             description = input("Enter a description for the new task: ")
             priority = input("Enter a priority for the new task: ")
@@ -63,11 +58,14 @@ while True:
             newest_id += 1
             print(new_task)
 
+        # Get task by priority
         case "2":
             next_task = get_task_by_priority()
             print(next_task)
             pass
 
+        
+        # Get task by id
         case "3":
             id = input("Enter the task's id: ")
 
@@ -75,16 +73,19 @@ while True:
 
             print(found_task)
 
+        # Complete task
         case "4":
             id = input("Enter the task's id: ")
 
             task = complete_task(int(id))
             print(task)
 
+        # Exit program
         case "quit":
             print("Shutting down...")
             break
 
+        # Basic feedback to reduce ambiguity for POC tester
         case _:
             print("You must choose 1, 2, 3, or 4")
 
