@@ -1,3 +1,9 @@
+# How to run the program
+Run:
+py main.py
+OR
+python3 main.py
+
 # 1. Add new tasks
 When prompted, enter "1" on the main menu then enter the following fields:
 - Description (string)- Core content of the task
